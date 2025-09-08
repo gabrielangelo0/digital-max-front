@@ -48,7 +48,16 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              target.src = `https://via.placeholder.com/300x450/1a1a1a/ffffff?text=${encodeURIComponent(movie.title)}`;
+              // Fallback para uma imagem colorida do Unsplash baseada no gênero
+              const genreImages: Record<string, string> = {
+                'Ação': 'https://images.unsplash.com/photo-1489599904472-26651c7d4f17?w=300&h=450&fit=crop&q=80',
+                'Romance': 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=450&fit=crop&q=80',
+                'Ficção Científica': 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=300&h=450&fit=crop&q=80',
+                'Comédia': 'https://images.unsplash.com/photo-1489599904472-26651c7d4f17?w=300&h=450&fit=crop&q=80',
+                'Terror': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=450&fit=crop&q=80',
+                'Animação': 'https://images.unsplash.com/photo-1594736797933-d0ac8cb2837e?w=300&h=450&fit=crop&q=80',
+              };
+              target.src = genreImages[movie.genre] || 'https://images.unsplash.com/photo-1489599904472-26651c7d4f17?w=300&h=450&fit=crop&q=80';
             }}
           />
           

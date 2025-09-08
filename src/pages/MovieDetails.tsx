@@ -61,7 +61,15 @@ const MovieDetails = () => {
                   className="w-full aspect-[2/3] object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.src = `https://via.placeholder.com/400x600/1a1a1a/ffffff?text=${encodeURIComponent(movie.title)}`;
+                    const genreImages: Record<string, string> = {
+                      'Ação': 'https://images.unsplash.com/photo-1489599904472-26651c7d4f17?w=400&h=600&fit=crop&q=80',
+                      'Romance': 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=600&fit=crop&q=80',
+                      'Ficção Científica': 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400&h=600&fit=crop&q=80',
+                      'Comédia': 'https://images.unsplash.com/photo-1489599904472-26651c7d4f17?w=400&h=600&fit=crop&q=80',
+                      'Terror': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&q=80',
+                      'Animação': 'https://images.unsplash.com/photo-1594736797933-d0ac8cb2837e?w=400&h=600&fit=crop&q=80',
+                    };
+                    target.src = genreImages[movie.genre] || 'https://images.unsplash.com/photo-1489599904472-26651c7d4f17?w=400&h=600&fit=crop&q=80';
                   }}
                 />
               </Card>
