@@ -17,6 +17,12 @@ import { useAuthStore } from '@/stores/auth';
 import { useMoviesStore } from '@/stores/movies';
 import { motion } from 'framer-motion';
 
+// Import admin pages
+import MoviesManagement from './admin/MoviesManagement';
+import CinemasManagement from './admin/CinemasManagement';
+import SessionsManagement from './admin/SessionsManagement';
+import OrdersManagement from './admin/OrdersManagement';
+
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -217,30 +223,10 @@ const AdminDashboard = () => {
           <div className="flex-1">
             <Routes>
               <Route path="/" element={<DashboardOverview />} />
-              <Route path="/filmes" element={
-                <div className="text-center py-16">
-                  <h2 className="text-2xl font-bold mb-4">Gerenciamento de Filmes</h2>
-                  <p className="text-muted-foreground">Em desenvolvimento...</p>
-                </div>
-              } />
-              <Route path="/cinemas" element={
-                <div className="text-center py-16">
-                  <h2 className="text-2xl font-bold mb-4">Gerenciamento de Cinemas</h2>
-                  <p className="text-muted-foreground">Em desenvolvimento...</p>
-                </div>
-              } />
-              <Route path="/sessoes" element={
-                <div className="text-center py-16">
-                  <h2 className="text-2xl font-bold mb-4">Gerenciamento de Sessões</h2>
-                  <p className="text-muted-foreground">Em desenvolvimento...</p>
-                </div>
-              } />
-              <Route path="/pedidos" element={
-                <div className="text-center py-16">
-                  <h2 className="text-2xl font-bold mb-4">Histórico de Pedidos</h2>
-                  <p className="text-muted-foreground">Em desenvolvimento...</p>
-                </div>
-              } />
+              <Route path="/filmes" element={<MoviesManagement />} />
+              <Route path="/cinemas" element={<CinemasManagement />} />
+              <Route path="/sessoes" element={<SessionsManagement />} />
+              <Route path="/pedidos" element={<OrdersManagement />} />
             </Routes>
           </div>
         </div>
