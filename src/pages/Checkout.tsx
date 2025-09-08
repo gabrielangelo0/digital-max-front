@@ -80,13 +80,17 @@ const Checkout = () => {
   const total = subtotal + fees;
 
   const onSubmit = async (data: PaymentFormData) => {
+    console.log('🚀 INICIANDO PAGAMENTO...', data);
     if (!user || !currentSession) return;
 
     setIsProcessing(true);
 
     try {
+      console.log('💳 SIMULANDO PAGAMENTO...');
       // Simular processamento do pagamento
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Reduzido para 2s
+
+      console.log('✅ PAGAMENTO PROCESSADO, CRIANDO ORDEM...');
 
       // Criar ordem
       const orderId = crypto.randomUUID();
@@ -123,9 +127,7 @@ const Checkout = () => {
       const newOccupiedSeats = [...currentSession.occupiedSeats, ...items.map(item => item.seatId)];
       updateOccupiedSeats(currentSession.id, newOccupiedSeats);
 
-      clearCart();
-
-      // Preparar dados do ticket para a página de confirmação
+      // Redirecionar IMEDIATAMENTE para página de confirmação - SEM AGUARDAR
       const ticketData = {
         id: orderId,
         movieTitle: newOrder.movieTitle,
@@ -141,8 +143,10 @@ const Checkout = () => {
         qrCode: newOrder.qrCode
       };
 
-      // Redirecionar para página de confirmação
-      navigate('/confirmacao', { state: { ticketData } });
+      console.log('🎫 DADOS DO TICKET PREPARADOS:', ticketData);
+      console.log('🚀 NAVEGANDO PARA CONFIRMAÇÃO...');
+      // NAVEGAÇÃO IMEDIATA
+      navigate('/confirmacao', { state: { ticketData }, replace: true });
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
     } finally {
