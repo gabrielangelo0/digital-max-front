@@ -11,13 +11,13 @@ interface MovieCardProps {
 }
 
 const genreColors: Record<string, string> = {
-  'Ação': 'bg-red-500',
-  'Romance': 'bg-pink-500',
-  'Ficção Científica': 'bg-blue-500',
-  'Comédia': 'bg-yellow-500',
-  'Terror': 'bg-purple-500',
-  'Animação': 'bg-green-500',
-  'Drama': 'bg-gray-500',
+  'Ação': 'bg-red-600 text-white',
+  'Romance': 'bg-pink-600 text-white',
+  'Ficção Científica': 'bg-blue-600 text-white',
+  'Comédia': 'bg-yellow-600 text-white',
+  'Terror': 'bg-purple-600 text-white',
+  'Animação': 'bg-green-600 text-white',
+  'Drama': 'bg-gray-600 text-white',
 };
 
 const formatDuration = (minutes: number): string => {
@@ -27,10 +27,10 @@ const formatDuration = (minutes: number): string => {
 };
 
 const getAgeRatingColor = (rating: number): string => {
-  if (rating === 0) return 'bg-green-500';
-  if (rating <= 12) return 'bg-yellow-500';
-  if (rating <= 16) return 'bg-orange-500';
-  return 'bg-red-500';
+  if (rating === 0) return 'bg-green-600 text-white';
+  if (rating <= 12) return 'bg-yellow-600 text-black';
+  if (rating <= 16) return 'bg-orange-600 text-white';
+  return 'bg-red-600 text-white';
 };
 
 export const MovieCard = ({ movie }: MovieCardProps) => {
@@ -66,14 +66,14 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
           
           {/* Age Rating Badge */}
           <Badge 
-            className={`absolute top-3 left-3 ${getAgeRatingColor(movie.ageRating)} text-white font-bold`}
+            className={`absolute top-3 left-3 ${getAgeRatingColor(movie.ageRating)} font-bold border-0 shadow-md`}
           >
             {movie.ageRating === 0 ? 'L' : `${movie.ageRating}`}
           </Badge>
           
           {/* Genre Badge */}
           <Badge 
-            className={`absolute top-3 right-3 ${genreColors[movie.genre] || 'bg-gray-500'} text-white`}
+            className={`absolute top-3 right-3 ${genreColors[movie.genre] || 'bg-gray-600 text-white'} border-0 shadow-md`}
           >
             {movie.genre}
           </Badge>
@@ -82,7 +82,7 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
         <CardContent className="p-4">
           <div className="space-y-3">
             <div>
-              <h3 className="font-semibold text-lg leading-tight mb-2 line-clamp-2">
+              <h3 className="font-semibold text-lg leading-tight mb-2 line-clamp-2 text-foreground">
                 {movie.title}
               </h3>
               <p className="text-sm text-muted-foreground line-clamp-3">

@@ -62,8 +62,8 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              CineMax
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 text-foreground">
+              <span className="bg-gradient-primary bg-clip-text text-transparent">CineMax</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Sua experiência cinematográfica começa aqui. Descubra os melhores filmes em cartaz e reserve seus ingressos com facilidade.

@@ -5,7 +5,7 @@ import moviePoster1 from '@/assets/movie-poster-1.jpg';
 import moviePoster2 from '@/assets/movie-poster-2.jpg';
 import moviePoster3 from '@/assets/movie-poster-3.jpg';
 
-const SEED_VERSION = '1.1.0'; // Atualizada versão para recriar dados
+const SEED_VERSION = '1.2.0'; // Atualizada versão para recriar dados
 
 // Usuários de demonstração
 const seedUsers: User[] = [
@@ -46,7 +46,7 @@ const seedMovies: Movie[] = [
     title: 'Amores de Inverno',
     synopsis: 'Uma história tocante sobre segundas chances e o poder transformador do amor verdadeiro em meio às dificuldades da vida.',
     posterUrl: moviePoster2,
-    trailerUrl: 'https://www.youtube.com/embed/example2',
+    trailerUrl: 'https://www.youtube.com/embed/NV3sBlRgzTI',
     genre: 'Romance',
     duration: 108,
     ageRating: 12,
@@ -58,7 +58,7 @@ const seedMovies: Movie[] = [
     title: 'Galáxia 9',
     synopsis: 'A épica jornada de uma tripulação espacial que descobre uma civilização alienígena avançada nas profundezas do cosmos.',
     posterUrl: moviePoster3,
-    trailerUrl: 'https://www.youtube.com/embed/example3',
+    trailerUrl: 'https://www.youtube.com/embed/zSWdZVtXT7E',
     genre: 'Ficção Científica',
     duration: 140,
     ageRating: 10,
@@ -70,7 +70,7 @@ const seedMovies: Movie[] = [
     title: 'Risadas Garantidas',
     synopsis: 'Uma comédia hilariante sobre um grupo de amigos que se reencontram após 20 anos para uma aventura inesquecível.',
     posterUrl: 'https://images.unsplash.com/photo-1489599904472-26651c7d4f17?w=400&h=600&fit=crop&q=80',
-    trailerUrl: 'https://www.youtube.com/embed/example4',
+    trailerUrl: 'https://www.youtube.com/embed/QdBZY2fkU-0',
     genre: 'Comédia',
     duration: 95,
     ageRating: 12,
@@ -82,7 +82,7 @@ const seedMovies: Movie[] = [
     title: 'Noite de Terror',
     synopsis: 'Um thriller psicológico que mantém o público na beira do assento com reviravoltas inesperadas e sustos de arrepiar.',
     posterUrl: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=600&fit=crop&q=80',
-    trailerUrl: 'https://www.youtube.com/embed/example5',
+    trailerUrl: 'https://www.youtube.com/embed/hAUTdjf9rko',
     genre: 'Terror',
     duration: 110,
     ageRating: 16,

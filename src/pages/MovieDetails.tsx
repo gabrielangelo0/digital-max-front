@@ -85,7 +85,7 @@ const MovieDetails = () => {
                   </Badge>
                 </div>
                 
-                <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>
+                <h1 className="text-4xl font-bold mb-4 text-foreground">{movie.title}</h1>
                 
                 <div className="flex items-center gap-6 text-muted-foreground mb-6">
                   <div className="flex items-center gap-2">
