@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, CreditCard, Check, Ticket } from 'lucide-react';
+import { ArrowLeft, CreditCard, Check, Ticket, Film } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Stepper } from '@/components/Stepper';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useCartStore } from '@/stores/cart';
@@ -185,50 +186,428 @@ const Checkout = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-md mx-auto text-center space-y-6"
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
           >
-            <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto">
-              <Check className="w-10 h-10 text-white" />
-            </div>
-            
-            <div>
-              <h1 className="text-3xl font-bold text-green-500 mb-2">Compra Realizada!</h1>
-              <p className="text-muted-foreground">
-                Seus ingressos foram confirmados e enviados por email.
-              </p>
+            {/* Success Header */}
+            <div className="text-center mb-8">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <Check className="w-10 h-10 text-white" />
+              </motion.div>
+              
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="text-3xl font-bold text-green-500 mb-2"
+              >
+                Compra Realizada com Sucesso!
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="text-muted-foreground"
+              >
+                Seus ingressos foram confirmados. Apresente este código na entrada do cinema.
+              </motion.p>
             </div>
 
-            <Card>
-              <CardContent className="p-6 text-left">
-                <div className="space-y-2">
-                  <p><strong>Código do Pedido:</strong> #{orderId.slice(0, 8).toUpperCase()}</p>
-                  <p><strong>Filme:</strong> {currentSession.movie.title}</p>
-                  <p><strong>Cinema:</strong> {currentSession.cinema.name}</p>
-                  <p><strong>Data:</strong> {format(new Date(currentSession.date), "dd 'de' MMMM", { locale: ptBR })}</p>
-                  <p><strong>Horário:</strong> {currentSession.time.slice(0, 5)}</p>
-                  <p><strong>Assentos:</strong> {items.map(item => item.seatId).join(', ')}</p>
+            {/* Ticket Preview */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+              className="relative"
+            >
+              {/* Main Ticket Card */}
+              <Card className="overflow-hidden bg-gradient-to-br from-card via-card to-muted/20 border-2 border-primary/20 shadow-2xl">
+                <div className="relative">
+                  {/* Decorative Header */}
+                  <div className="h-2 bg-gradient-primary"></div>
+                  
+                  {/* Ticket Content */}
+                  <div className="p-8">
+                    <div className="grid lg:grid-cols-3 gap-8">
+                      {/* Left Section - Movie Info */}
+                      <div className="lg:col-span-2 space-y-6">
+                        {/* Cinema Logo */}
+                        <div className="flex items-center gap-3 mb-6">
+                          <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                            <Film className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h2 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+                              CineMax
+                            </h2>
+                            <p className="text-sm text-muted-foreground">Ingresso Digital</p>
+                          </div>
+                        </div>
+
+                        {/* Movie Title */}
+                        <div>
+                          <h3 className="text-3xl font-bold mb-2">{currentSession.movie.title}</h3>
+                          <div className="flex items-center gap-4 text-muted-foreground">
+                            <Badge variant="secondary">{currentSession.movie.genre}</Badge>
+                            <span>{currentSession.movie.duration} min</span>
+                            <Badge variant="outline">
+                              {currentSession.movie.ageRating === 0 ? 'Livre' : `${currentSession.movie.ageRating}+`}
+                            </Badge>
+                          </div>
+                        </div>
+
+                        {/* Session Details Grid */}
+                        <div className="grid grid-cols-2 gap-6">
+                          <div className="space-y-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground uppercase tracking-wide">Cinema</p>
+                              <p className="font-semibold">{currentSession.cinema.name}</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground uppercase tracking-wide">Data</p>
+                              <p className="font-semibold">
+                                {format(new Date(currentSession.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground uppercase tracking-wide">Assentos</p>
+                              <p className="font-semibold text-primary">
+                                {items.map(item => item.seatId).join(", ")}
+                              </p>
+                            </div>
+                          </div>
+                          
+                          <div className="space-y-4">
+                            <div>
+                              <p className="text-sm text-muted-foreground uppercase tracking-wide">Sala</p>
+                              <p className="font-semibold">{currentSession.room.name} ({currentSession.room.type})</p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground uppercase tracking-wide">Horário</p>
+                              <p className="font-semibold text-2xl text-primary">
+                                {currentSession.time.slice(0, 5)}
+                              </p>
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground uppercase tracking-wide">Total Pago</p>
+                              <p className="font-bold text-xl text-green-500">
+                                {formatPrice(total)}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right Section - QR Code & Order Info */}
+                      <div className="flex flex-col items-center justify-center space-y-6 border-l border-dashed border-border pl-8">
+                        {/* QR Code */}
+                        <div className="bg-white p-4 rounded-xl shadow-lg">
+                          <div className="w-32 h-32 bg-black flex items-center justify-center rounded-lg">
+                            <div className="text-white text-xs font-mono text-center leading-tight p-2">
+                              QR CODE<br />
+                              {orderId.slice(0, 8).toUpperCase()}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Order ID */}
+                        <div className="text-center">
+                          <p className="text-sm text-muted-foreground uppercase tracking-wide mb-1">
+                            Código do Pedido
+                          </p>
+                          <p className="font-mono font-bold text-lg">
+                            #{orderId.slice(0, 8).toUpperCase()}
+                          </p>
+                        </div>
+
+                        {/* Validation Info */}
+                        <div className="text-center text-xs text-muted-foreground">
+                          <p>Válido até:</p>
+                          <p className="font-semibold">
+                            {format(new Date(currentSession.date), "dd/MM/yyyy", { locale: ptBR })}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Ticket Tickets Details */}
+                    <div className="mt-8 pt-6 border-t border-dashed border-border">
+                      <h4 className="font-semibold mb-4">Detalhes dos Ingressos:</h4>
+                      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {items.map((item, index) => (
+                          <div
+                            key={item.seatId}
+                            className="flex justify-between items-center p-3 bg-muted/30 rounded-lg"
+                          >
+                            <div>
+                              <span className="font-medium">Assento {item.seatId}</span>
+                              <Badge variant="outline" className="ml-2 text-xs">
+                                {item.ticketType}
+                              </Badge>
+                            </div>
+                            <span className="font-semibold text-primary">
+                              {formatPrice(item.price)}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="mt-6 pt-4 border-t border-border text-center text-xs text-muted-foreground">
+                      <p>
+                        Emitido em: {format(new Date(), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })} • 
+                        Apresente este código na entrada do cinema
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </Card>
 
-            <div className="space-y-3">
+              {/* Decorative Elements */}
+              <div className="absolute -top-4 -left-4 w-8 h-8 bg-background border-4 border-primary rounded-full"></div>
+              <div className="absolute -top-4 -right-4 w-8 h-8 bg-background border-4 border-primary rounded-full"></div>
+              <div className="absolute -bottom-4 -left-4 w-8 h-8 bg-background border-4 border-primary rounded-full"></div>
+              <div className="absolute -bottom-4 -right-4 w-8 h-8 bg-background border-4 border-primary rounded-full"></div>
+            </motion.div>
+
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4 mt-8 justify-center"
+            >
               <Button 
-                className="w-full gradient-primary" 
+                size="lg"
+                onClick={() => {
+                  const order = {
+                    id: orderId,
+                    movieTitle: currentSession.movie.title,
+                    cinemaName: currentSession.cinema.name,
+                    roomName: currentSession.room.name,
+                    date: currentSession.date,
+                    time: currentSession.time,
+                    seats: items,
+                    total,
+                    qrCode: `TICKET-${orderId.slice(0, 8).toUpperCase()}`,
+                    createdAt: new Date().toISOString()
+                  };
+                  
+                  const ticketContent = `
+                    <!DOCTYPE html>
+                    <html>
+                      <head>
+                        <title>Ingresso - ${order.movieTitle}</title>
+                        <style>
+                          body { 
+                            font-family: 'Arial', sans-serif; 
+                            max-width: 800px; 
+                            margin: 0 auto; 
+                            padding: 20px;
+                            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+                            color: white;
+                          }
+                          .ticket { 
+                            background: linear-gradient(135deg, #1e1e1e, #2e2e2e);
+                            border: 2px solid #e11d48;
+                            border-radius: 15px;
+                            padding: 30px; 
+                            margin: 20px 0;
+                            position: relative;
+                            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+                          }
+                          .ticket::before {
+                            content: '';
+                            position: absolute;
+                            top: -10px;
+                            left: -10px;
+                            right: -10px;
+                            height: 4px;
+                            background: linear-gradient(90deg, #e11d48, #dc2626);
+                          }
+                          .header { 
+                            text-align: center; 
+                            margin-bottom: 30px;
+                            border-bottom: 2px dashed #444;
+                            padding-bottom: 20px;
+                          }
+                          .logo {
+                            font-size: 28px;
+                            font-weight: bold;
+                            color: #e11d48;
+                            margin-bottom: 5px;
+                          }
+                          .movie-title {
+                            font-size: 24px;
+                            font-weight: bold;
+                            margin: 20px 0;
+                            color: #ffffff;
+                          }
+                          .info { 
+                            display: grid; 
+                            grid-template-columns: 1fr 1fr; 
+                            gap: 20px; 
+                            margin: 30px 0;
+                          }
+                          .info-item {
+                            background: rgba(255,255,255,0.05);
+                            padding: 15px;
+                            border-radius: 8px;
+                            border-left: 4px solid #e11d48;
+                          }
+                          .info-label {
+                            font-size: 12px;
+                            color: #888;
+                            text-transform: uppercase;
+                            margin-bottom: 5px;
+                          }
+                          .info-value {
+                            font-size: 16px;
+                            font-weight: bold;
+                            color: white;
+                          }
+                          .qr-section {
+                            text-align: center;
+                            margin: 30px 0;
+                            padding: 20px;
+                            background: rgba(255,255,255,0.1);
+                            border-radius: 10px;
+                          }
+                          .qr-code {
+                            display: inline-block;
+                            background: white;
+                            color: black;
+                            padding: 20px;
+                            font-family: monospace;
+                            font-size: 16px;
+                            border-radius: 8px;
+                            margin: 10px;
+                          }
+                          .seats {
+                            background: rgba(225, 29, 72, 0.1);
+                            padding: 15px;
+                            border-radius: 8px;
+                            text-align: center;
+                            margin: 20px 0;
+                          }
+                          .total {
+                            font-size: 20px;
+                            font-weight: bold;
+                            color: #22c55e;
+                            text-align: center;
+                            margin: 20px 0;
+                          }
+                          @media print {
+                            body { 
+                              background: white;
+                              color: black;
+                            }
+                            .ticket {
+                              background: white;
+                              color: black;
+                            }
+                            .no-print { display: none; }
+                          }
+                        </style>
+                      </head>
+                      <body>
+                        <div class="ticket">
+                          <div class="header">
+                            <div class="logo">🎬 CineMax</div>
+                            <div>Ingresso Digital</div>
+                            <div class="movie-title">${order.movieTitle}</div>
+                          </div>
+                          
+                          <div class="info">
+                            <div class="info-item">
+                              <div class="info-label">Cinema</div>
+                              <div class="info-value">${order.cinemaName}</div>
+                            </div>
+                            <div class="info-item">
+                              <div class="info-label">Sala</div>
+                              <div class="info-value">${order.roomName}</div>
+                            </div>
+                            <div class="info-item">
+                              <div class="info-label">Data</div>
+                              <div class="info-value">${format(new Date(order.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}</div>
+                            </div>
+                            <div class="info-item">
+                              <div class="info-label">Horário</div>
+                              <div class="info-value">${order.time.slice(0, 5)}</div>
+                            </div>
+                          </div>
+
+                          <div class="seats">
+                            <div class="info-label">Assentos</div>
+                            <div style="font-size: 18px; font-weight: bold; color: #e11d48; margin-top: 5px;">
+                              ${order.seats.map(s => s.seatId).join(', ')}
+                            </div>
+                          </div>
+
+                          <div class="qr-section">
+                            <div class="info-label">Código QR</div>
+                            <div class="qr-code">${order.qrCode}</div>
+                            <div style="margin-top: 10px; font-size: 14px; color: #888;">
+                              Apresente este código na entrada
+                            </div>
+                          </div>
+
+                          <div class="total">
+                            Total Pago: ${formatPrice(order.total)}
+                          </div>
+
+                          <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #666; border-top: 1px dashed #333; padding-top: 15px;">
+                            Pedido #${order.id.slice(0, 8).toUpperCase()} • 
+                            Emitido em ${format(new Date(order.createdAt), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}
+                          </div>
+                        </div>
+
+                        <div class="no-print" style="text-align: center; margin: 30px;">
+                          <button onclick="window.print()" style="background: #e11d48; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; cursor: pointer; margin-right: 10px;">
+                            🖨️ Imprimir Ingresso
+                          </button>
+                          <button onclick="window.close()" style="background: #6b7280; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; cursor: pointer;">
+                            Fechar
+                          </button>
+                        </div>
+                      </body>
+                    </html>
+                  `;
+
+                  const printWindow = window.open('', '_blank');
+                  if (printWindow) {
+                    printWindow.document.write(ticketContent);
+                    printWindow.document.close();
+                  }
+                }}
+                className="gradient-primary"
+              >
+                <Ticket className="w-5 h-5 mr-2" />
+                Baixar/Imprimir Ingresso
+              </Button>
+              
+              <Button 
+                variant="outline"
+                size="lg"
                 onClick={() => navigate('/conta/compras')}
               >
-                <Ticket className="w-4 h-4 mr-2" />
                 Ver Meus Ingressos
               </Button>
               
               <Button 
-                variant="outline" 
-                className="w-full"
+                variant="ghost"
+                size="lg"
                 onClick={() => navigate('/')}
               >
-                Voltar ao Catálogo
+                Comprar Mais Ingressos
               </Button>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
