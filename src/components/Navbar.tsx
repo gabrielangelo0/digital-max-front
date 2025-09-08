@@ -45,7 +45,7 @@ export const Navbar = () => {
             className="flex items-center space-x-2 text-xl font-bold text-primary hover:text-primary-hover transition-colors"
           >
             <Film className="w-8 h-8" />
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
+            <span className="text-primary">
               CineMax
             </span>
           </Link>
