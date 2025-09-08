@@ -228,7 +228,7 @@ const TicketConfirmation = () => {
           <div class="container">
             <div class="ticket">
               <div class="header">
-                <div class="logo">🎬 CineMax</div>
+                <div class="logo">🎬 DigitalMax</div>
                 <div class="success-icon">✓</div>
                 <h2 style="color: #16a34a; margin: 10px 0;">Compra Confirmada!</h2>
               </div>
@@ -282,7 +282,7 @@ const TicketConfirmation = () => {
               </div>
               
               <div class="footer">
-                <p>© 2024 CineMax - Todos os direitos reservados</p>
+                <p>© 2024 DigitalMax - Todos os direitos reservados</p>
                 <p>Ingresso válido apenas para a sessão especificada</p>
               </div>
             </div>
@@ -353,7 +353,7 @@ const TicketConfirmation = () => {
           <Card className="overflow-hidden border-2 border-primary shadow-2xl shadow-primary/20">
             {/* Header do Ticket */}
             <div className="bg-gradient-dark p-6 text-center border-b-2 border-dashed border-border">
-              <div className="text-2xl font-bold text-primary mb-2">🎬 CineMax</div>
+              <div className="text-2xl font-bold text-primary mb-2">🎬 DigitalMax</div>
               <Badge className="bg-green-600 text-white px-4 py-1">
                 Ingresso Confirmado
               </Badge>
@@ -510,7 +510,7 @@ const TicketConfirmation = () => {
           className="text-center mt-12 p-6 bg-muted/30 rounded-lg"
         >
           <p className="text-lg text-foreground mb-2">
-            Obrigado por escolher o CineMax! 🍿
+            Obrigado por escolher o DigitalMax! 🍿
           </p>
           <p className="text-muted-foreground">
             Chegue com 15 minutos de antecedência. Tenha uma ótima sessão!

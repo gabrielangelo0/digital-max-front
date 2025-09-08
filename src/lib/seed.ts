@@ -108,21 +108,21 @@ const seedCinemas: Cinema[] = [
   // São Paulo
   {
     id: '1',
-    name: 'CineMax Shopping Ibirapuera',
+    name: 'DigitalMax Shopping Ibirapuera',
     city: 'São Paulo',
     address: 'Av. Ibirapuera, 3103 - Ibirapuera',
     isActive: true,
   },
   {
     id: '2',
-    name: 'CineMax Shopping Eldorado',
+    name: 'DigitalMax Shopping Eldorado',
     city: 'São Paulo',
     address: 'Av. Rebouças, 3970 - Pinheiros',
     isActive: true,
   },
   {
     id: '3',
-    name: 'CineMax Morumbi',
+    name: 'DigitalMax Morumbi',
     city: 'São Paulo',
     address: 'Av. das Nações Unidas, 14401 - Vila Gertrudes',
     isActive: true,
@@ -130,14 +130,14 @@ const seedCinemas: Cinema[] = [
   // Rio de Janeiro
   {
     id: '4',
-    name: 'CineMax Barra Shopping',
+    name: 'DigitalMax Barra Shopping',
     city: 'Rio de Janeiro',
     address: 'Av. das Américas, 4666 - Barra da Tijuca',
     isActive: true,
   },
   {
     id: '5',
-    name: 'CineMax Copacabana',
+    name: 'DigitalMax Copacabana',
     city: 'Rio de Janeiro',
     address: 'Av. Nossa Senhora de Copacabana, 581 - Copacabana',
     isActive: true,
@@ -145,14 +145,14 @@ const seedCinemas: Cinema[] = [
   // Fortaleza
   {
     id: '6',
-    name: 'CineMax Iguatemi Fortaleza',
+    name: 'DigitalMax Iguatemi Fortaleza',
     city: 'Fortaleza',
     address: 'Av. Washington Soares, 85 - Edson Queiroz',
     isActive: true,
   },
   {
     id: '7',
-    name: 'CineMax RioMar Fortaleza',
+    name: 'DigitalMax RioMar Fortaleza',
     city: 'Fortaleza',
     address: 'Rua Desembargador Lauro Nogueira, 1500 - Papicu',
     isActive: true,
@@ -250,7 +250,7 @@ export const initializeSeedData = () => {
   const currentVersion = localStorage.getItem('tickets.seedVersion');
   
   if (currentVersion !== SEED_VERSION) {
-    console.log('Inicializando dados seed do CineMax...');
+    console.log('Inicializando dados seed do DigitalMax...');
     
     // Limpar dados existentes
     localStorage.removeItem('tickets.users');

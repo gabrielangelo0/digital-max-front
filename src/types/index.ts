@@ -1,4 +1,4 @@
-// Tipos principais da aplicação CineMax
+// Tipos principais da aplicação DigitalMax
 
 export interface User {
   id: string;

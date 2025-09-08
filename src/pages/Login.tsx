@@ -69,7 +69,7 @@ const Login = () => {
           <Link to="/" className="inline-flex items-center space-x-2 text-2xl font-bold text-primary hover:text-primary-hover transition-colors">
             <Film className="w-8 h-8" />
             <span className="bg-gradient-primary bg-clip-text text-transparent">
-              CineMax
+              DigitalMax
             </span>
           </Link>
         </div>

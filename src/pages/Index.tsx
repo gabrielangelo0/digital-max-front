@@ -63,7 +63,7 @@ const Index = () => {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6 text-primary">
-              CineMax
+              DigitalMax
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Sua experiência cinematográfica começa aqui. Descubra os melhores filmes em cartaz e reserve seus ingressos com facilidade.
@@ -160,7 +160,7 @@ const Index = () => {
       <footer className="bg-muted/30 border-t border-border py-12">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
-            © 2024 CineMax. Todos os direitos reservados.
+            © 2024 DigitalMax. Todos os direitos reservados.
           </p>
         </div>
       </footer>

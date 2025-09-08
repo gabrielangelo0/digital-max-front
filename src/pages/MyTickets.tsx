@@ -113,7 +113,7 @@ const MyTickets = () => {
         <body>
           <div class="ticket">
             <div class="header">
-              <h1>🎬 CineMax</h1>
+              <h1>🎬 DigitalMax</h1>
               <h2>${order.movieTitle}</h2>
             </div>
             

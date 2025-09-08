@@ -46,7 +46,7 @@ export const Navbar = () => {
           >
             <Film className="w-8 h-8" />
             <span className="text-primary">
-              CineMax
+              DigitalMax
             </span>
           </Link>
 
