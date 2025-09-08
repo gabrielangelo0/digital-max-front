@@ -134,8 +134,11 @@ const Checkout = () => {
       await new Promise(resolve => setTimeout(resolve, 3000));
 
       // Criar ordem
+      const orderId = crypto.randomUUID();
+      const qrCode = `TICKET-${orderId.slice(0, 8).toUpperCase()}`;
+      
       const newOrder: Order = {
-        id: crypto.randomUUID(),
+        id: orderId,
         userId: user.id,
         sessionId: currentSession.id,
         movieTitle: currentSession.movie.title,
@@ -152,7 +155,7 @@ const Checkout = () => {
         paymentMethod: `Cartão final ${data.cardNumber.slice(-4)}`,
         cardNumber: `****.**** ****${data.cardNumber.slice(-4)}`,
         createdAt: new Date().toISOString(),
-        qrCode: `TICKET-${crypto.randomUUID().slice(0, 8).toUpperCase()}`,
+        qrCode,
         status: 'confirmed',
       };
 
@@ -165,9 +168,26 @@ const Checkout = () => {
       const newOccupiedSeats = [...currentSession.occupiedSeats, ...items.map(item => item.seatId)];
       updateOccupiedSeats(currentSession.id, newOccupiedSeats);
 
-      setOrderId(newOrder.id);
-      setOrderComplete(true);
       clearCart();
+
+      // Preparar dados do ticket para a página de confirmação
+      const ticketData = {
+        id: orderId,
+        movieTitle: newOrder.movieTitle,
+        moviePoster: currentSession.movie.posterUrl || '',
+        cinemaName: newOrder.cinemaName,
+        roomName: newOrder.roomName,
+        sessionTime: newOrder.time,
+        sessionDate: newOrder.date,
+        seats: items.map(item => item.seatId),
+        totalAmount: newOrder.total,
+        paymentMethod: 'Cartão de Crédito',
+        customerName: user.name,
+        qrCode: newOrder.qrCode
+      };
+
+      // Redirecionar para página de confirmação
+      navigate('/confirmacao', { state: { ticketData } });
     } catch (error) {
       console.error('Erro ao processar pagamento:', error);
     } finally {

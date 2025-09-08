@@ -18,6 +18,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyTickets from "./pages/MyTickets";
 import AdminDashboard from "./pages/AdminDashboard";
+import TicketConfirmation from "./pages/TicketConfirmation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -50,6 +51,7 @@ const App = () => {
               <Route path="/selecionar/:movieId" element={<SelectSession />} />
               <Route path="/assentos/:sessionId" element={<SeatSelection />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/confirmacao" element={<TicketConfirmation />} />
               <Route path="/login" element={<Login />} />
               <Route path="/cadastro" element={<Register />} />
               <Route path="/conta/compras" element={<MyTickets />} />
