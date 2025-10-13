@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Movie } from '@/types';
+import api from '@/lib/api';
 
 const movieSchema = z.object({
   title: z.string().min(1, 'Título é obrigatório').max(100, 'Título muito longo'),
@@ -86,7 +87,7 @@ export const MovieForm = ({ movie, onSubmit, onCancel, isLoading = false }: Movi
   const handleFormSubmit = async (data: MovieFormData) => {
     setError('');
     try {
-      onSubmit({
+      const newMovie = {
         title: data.title,
         synopsis: data.synopsis,
         posterUrl: data.posterUrl,
@@ -95,7 +96,9 @@ export const MovieForm = ({ movie, onSubmit, onCancel, isLoading = false }: Movi
         duration: data.duration,
         ageRating: data.ageRating,
         releaseDate: data.releaseDate,
-      });
+      }
+
+      await api.post('/movies', newMovie);
     } catch (err) {
       setError('Erro ao salvar filme. Tente novamente.');
     }

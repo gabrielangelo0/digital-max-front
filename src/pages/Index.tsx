@@ -9,18 +9,36 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useMoviesStore } from '@/stores/movies';
 import { Movie } from '@/types';
 import { motion } from 'framer-motion';
+import api from '@/lib/api';
 
 const Index = () => {
   const [searchParams] = useSearchParams();
-  const { movies, cinemas, loadData } = useMoviesStore();
+  const { cinemas, loadData } = useMoviesStore();
   const [filteredMovies, setFilteredMovies] = useState<Movie[]>([]);
   const [searchQuery, setSearchQuery] = useState(searchParams.get('search') || '');
   const [selectedGenre, setSelectedGenre] = useState('all');
   const [selectedCity, setSelectedCity] = useState('all');
 
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  console.log(movies);
   useEffect(() => {
-    loadData();
-  }, [loadData]);
+    const moviesApi = async () => {
+      try {
+        const response = await api.get('/movies');
+
+        console.log(response);
+        setMovies(response.data);
+        return response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    moviesApi();
+  }, []);
+
+
 
   useEffect(() => {
     let filtered = movies.filter(movie => movie.isActive);
